@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log4shell-demo1
+  name: log4shell1-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log4shell-demo1
+      app: log4shell1-demo
   template:
     metadata:
       labels:
-        app: log4shell-demo1
+        app: log4shell1-demo
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
-      - name: log4shell-demo1
+      - name: log4shell1-demo
         image: public.ecr.aws/f9n2h3p5/log4shellpub:<TAG>
         imagePullPolicy: "Always"
         ports:
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: log4shell-demo1
+  name: log4shell1-demo
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: external
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
@@ -39,4 +39,4 @@ spec:
       protocol: TCP
   type: LoadBalancer
   selector:
-    app: log4shell-demo1
+    app: log4shell1-demo
